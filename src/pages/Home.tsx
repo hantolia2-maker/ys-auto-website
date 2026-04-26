@@ -23,19 +23,20 @@ export const Home = () => {
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            className="mb-16 w-full flex justify-center relative z-20"
+          >
+            <img 
+              src="/logo.png" 
+              alt="Y&S Auto and Tires" 
+              className="h-48 md:h-64 lg:h-[22rem] w-auto drop-shadow-[0_10px_30px_rgba(59,130,246,0.3)]"
+            />
+          </motion.div>
+
           <div className="max-w-4xl">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
-              className="mb-12 flex justify-center w-full relative z-20"
-            >
-              <img 
-                src="/logo.png" 
-                alt="Y&S Auto and Tires" 
-                className="h-48 md:h-64 lg:h-[22rem] w-auto drop-shadow-[0_10px_30px_rgba(59,130,246,0.3)]"
-              />
-            </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
