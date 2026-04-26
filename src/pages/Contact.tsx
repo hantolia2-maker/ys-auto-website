@@ -5,6 +5,7 @@ import { BUSINESS_INFO } from '../constants';
 export const Contact = () => {
   const [result, setResult] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -16,8 +17,8 @@ export const Contact = () => {
     // Simulate success if testing locally without an API key
     if (!accessKey) {
       setTimeout(() => {
+        setIsSubmitted(true);
         setResult("Message sent successfully! We will contact you soon.");
-        event.currentTarget.reset();
         setIsSubmitting(false);
       }, 1500);
       return;
@@ -38,15 +39,15 @@ export const Contact = () => {
       const data = await response.json();
 
       if (data.success) {
+        setIsSubmitted(true);
         setResult("Message sent successfully! We will contact you soon.");
-        event.currentTarget.reset();
       } else {
         console.log("Error", data);
-        setResult(data.message);
+        setResult(data.message || "Something went wrong. Please try again.");
       }
     } catch (error) {
       console.log("Error", error);
-      setResult("Something went wrong. Please try again later.");
+      setResult("Connection error. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -131,57 +132,81 @@ export const Contact = () => {
               className="lg:col-span-7"
             >
               <div className="glass-card p-10 lg:p-16 rounded-3xl border border-white/10">
-                <h2 className="text-3xl font-black uppercase tracking-tighter mb-10 text-white">SEND A <span className="text-brand-blue">MESSAGE</span></h2>
-                <form onSubmit={onSubmit} className="space-y-8">
-                  {/* Honeypot Spam Protection */}
-                  <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                      <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-muted mb-3 pl-4">Full Name</label>
-                      <input type="text" name="name" required className="w-full px-6 py-4 bg-brand-dark/50 border border-white/10 rounded-full focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-all text-white font-medium" placeholder="John Doe" />
+                {isSubmitted ? (
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="text-center py-20"
+                  >
+                    <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-8 border border-green-500/30">
+                      <svg className="w-10 h-10 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
+                      </svg>
                     </div>
-                    <div>
-                      <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-muted mb-3 pl-4">Email Address</label>
-                      <input type="email" name="email" required className="w-full px-6 py-4 bg-brand-dark/50 border border-white/10 rounded-full focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-all text-white font-medium" placeholder="john@example.com" />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                      <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-muted mb-3 pl-4">Phone</label>
-                      <input type="tel" name="phone" required className="w-full px-6 py-4 bg-brand-dark/50 border border-white/10 rounded-full focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-all text-white font-medium" placeholder="(555) 123-4567" />
-                    </div>
-                    <div>
-                      <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-muted mb-3 pl-4">Service Needed</label>
-                      <select name="service" required className="w-full px-6 py-4 bg-brand-dark/50 border border-white/10 rounded-full focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-all text-white font-medium appearance-none">
-                        <option className="bg-brand-dark text-white">General Auto Repair</option>
-                        <option className="bg-brand-dark text-white">Advanced Diagnostics</option>
-                        <option className="bg-brand-dark text-white">Brake Service</option>
-                        <option className="bg-brand-dark text-white">Oil Change</option>
-                        <option className="bg-brand-dark text-white">Alignment</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-muted mb-3 pl-4">Message</label>
-                    <textarea name="message" required className="w-full px-6 py-5 bg-brand-dark/50 border border-white/10 rounded-3xl focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-all text-white min-h-[160px] font-medium resize-none" placeholder="Tell us what's wrong with your vehicle..."></textarea>
-                  </div>
-                  <div>
-                    <motion.button 
-                      whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
-                      type="submit" 
-                      disabled={isSubmitting}
-                      className="w-full btn-premium py-5 text-sm disabled:opacity-70 disabled:cursor-not-allowed"
+                    <h2 className="text-4xl font-black uppercase tracking-tighter mb-4 text-white">MESSAGE SENT!</h2>
+                    <p className="text-brand-muted font-medium mb-10">We've received your request and our team will get back to you shortly.</p>
+                    <button 
+                      onClick={() => setIsSubmitted(false)}
+                      className="text-brand-cyan font-bold uppercase tracking-widest text-xs hover:text-white transition-colors"
                     >
-                      <span className="relative z-10">{isSubmitting ? 'SENDING...' : 'SEND MESSAGE'}</span>
-                    </motion.button>
-                  </div>
-                  {result && (
-                    <p className={`text-center text-sm font-bold ${result.includes('successfully') ? 'text-green-400' : 'text-red-400'}`}>
-                      {result}
-                    </p>
-                  )}
-                </form>
+                      Send another message
+                    </button>
+                  </motion.div>
+                ) : (
+                  <>
+                    <h2 className="text-3xl font-black uppercase tracking-tighter mb-10 text-white">SEND A <span className="text-brand-blue">MESSAGE</span></h2>
+                    <form onSubmit={onSubmit} className="space-y-8">
+                      {/* Honeypot Spam Protection */}
+                      <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                          <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-muted mb-3 pl-4">Full Name</label>
+                          <input type="text" name="name" required className="w-full px-6 py-4 bg-brand-dark/50 border border-white/10 rounded-full focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-all text-white font-medium" placeholder="John Doe" />
+                        </div>
+                        <div>
+                          <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-muted mb-3 pl-4">Email Address</label>
+                          <input type="email" name="email" required className="w-full px-6 py-4 bg-brand-dark/50 border border-white/10 rounded-full focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-all text-white font-medium" placeholder="john@example.com" />
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                          <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-muted mb-3 pl-4">Phone</label>
+                          <input type="tel" name="phone" required className="w-full px-6 py-4 bg-brand-dark/50 border border-white/10 rounded-full focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-all text-white font-medium" placeholder="(555) 123-4567" />
+                        </div>
+                        <div>
+                          <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-muted mb-3 pl-4">Service Needed</label>
+                          <select name="service" required className="w-full px-6 py-4 bg-brand-dark/50 border border-white/10 rounded-full focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-all text-white font-medium appearance-none">
+                            <option className="bg-brand-dark text-white">General Auto Repair</option>
+                            <option className="bg-brand-dark text-white">Advanced Diagnostics</option>
+                            <option className="bg-brand-dark text-white">Brake Service</option>
+                            <option className="bg-brand-dark text-white">Oil Change</option>
+                            <option className="bg-brand-dark text-white">Alignment</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-muted mb-3 pl-4">Message</label>
+                        <textarea name="message" required className="w-full px-6 py-5 bg-brand-dark/50 border border-white/10 rounded-3xl focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-all text-white min-h-[160px] font-medium resize-none" placeholder="Tell us what's wrong with your vehicle..."></textarea>
+                      </div>
+                      <div>
+                        <motion.button 
+                          whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+                          type="submit" 
+                          disabled={isSubmitting}
+                          className="w-full btn-premium py-5 text-sm disabled:opacity-70 disabled:cursor-not-allowed"
+                        >
+                          <span className="relative z-10">{isSubmitting ? 'SENDING...' : 'SEND MESSAGE'}</span>
+                        </motion.button>
+                      </div>
+                      {result && !result.includes('successfully') && (
+                        <p className="text-center text-sm font-bold text-red-400">
+                          {result}
+                        </p>
+                      )}
+                    </form>
+                  </>
+                )}
               </div>
             </motion.div>
           </div>
