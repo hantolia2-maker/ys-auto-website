@@ -1,8 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { BUSINESS_INFO } from '../constants';
 
 export const Contact = () => {
+  const [result, setResult] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setResult("Sending message...");
+
+    const formData = new FormData(event.currentTarget);
+    formData.append("access_key", import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "YOUR_ACCESS_KEY_HERE");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setResult("Message sent successfully! We will contact you soon.");
+        event.currentTarget.reset();
+      } else {
+        console.log("Error", data);
+        setResult(data.message);
+      }
+    } catch (error) {
+      console.log("Error", error);
+      setResult("Something went wrong. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="bg-brand-dark min-h-screen pt-24 text-white">
       <section className="py-24 relative overflow-hidden">
@@ -83,25 +117,25 @@ export const Contact = () => {
             >
               <div className="glass-card p-10 lg:p-16 rounded-3xl border border-white/10">
                 <h2 className="text-3xl font-black uppercase tracking-tighter mb-10 text-white">SEND A <span className="text-brand-blue">MESSAGE</span></h2>
-                <form className="space-y-8">
+                <form onSubmit={onSubmit} className="space-y-8">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
                       <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-muted mb-3 pl-4">Full Name</label>
-                      <input type="text" className="w-full px-6 py-4 bg-brand-dark/50 border border-white/10 rounded-full focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-all text-white font-medium" placeholder="John Doe" />
+                      <input type="text" name="name" required className="w-full px-6 py-4 bg-brand-dark/50 border border-white/10 rounded-full focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-all text-white font-medium" placeholder="John Doe" />
                     </div>
                     <div>
                       <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-muted mb-3 pl-4">Email Address</label>
-                      <input type="email" className="w-full px-6 py-4 bg-brand-dark/50 border border-white/10 rounded-full focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-all text-white font-medium" placeholder="john@example.com" />
+                      <input type="email" name="email" required className="w-full px-6 py-4 bg-brand-dark/50 border border-white/10 rounded-full focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-all text-white font-medium" placeholder="john@example.com" />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
                       <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-muted mb-3 pl-4">Phone</label>
-                      <input type="tel" className="w-full px-6 py-4 bg-brand-dark/50 border border-white/10 rounded-full focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-all text-white font-medium" placeholder="(555) 123-4567" />
+                      <input type="tel" name="phone" required className="w-full px-6 py-4 bg-brand-dark/50 border border-white/10 rounded-full focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-all text-white font-medium" placeholder="(555) 123-4567" />
                     </div>
                     <div>
                       <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-muted mb-3 pl-4">Service Needed</label>
-                      <select className="w-full px-6 py-4 bg-brand-dark/50 border border-white/10 rounded-full focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-all text-white font-medium appearance-none">
+                      <select name="service" required className="w-full px-6 py-4 bg-brand-dark/50 border border-white/10 rounded-full focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-all text-white font-medium appearance-none">
                         <option className="bg-brand-dark text-white">General Auto Repair</option>
                         <option className="bg-brand-dark text-white">Advanced Diagnostics</option>
                         <option className="bg-brand-dark text-white">Brake Service</option>
@@ -112,17 +146,23 @@ export const Contact = () => {
                   </div>
                   <div>
                     <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-muted mb-3 pl-4">Message</label>
-                    <textarea className="w-full px-6 py-5 bg-brand-dark/50 border border-white/10 rounded-3xl focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-all text-white min-h-[160px] font-medium resize-none" placeholder="Tell us what's wrong with your vehicle..."></textarea>
+                    <textarea name="message" required className="w-full px-6 py-5 bg-brand-dark/50 border border-white/10 rounded-3xl focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-all text-white min-h-[160px] font-medium resize-none" placeholder="Tell us what's wrong with your vehicle..."></textarea>
                   </div>
                   <div>
                     <motion.button 
                       whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
-                      type="button" 
-                      className="w-full btn-premium py-5 text-sm"
+                      type="submit" 
+                      disabled={isSubmitting}
+                      className="w-full btn-premium py-5 text-sm disabled:opacity-70 disabled:cursor-not-allowed"
                     >
-                      <span className="relative z-10">Send Message</span>
+                      <span className="relative z-10">{isSubmitting ? 'SENDING...' : 'SEND MESSAGE'}</span>
                     </motion.button>
                   </div>
+                  {result && (
+                    <p className={`text-center text-sm font-bold ${result.includes('successfully') ? 'text-green-400' : 'text-red-400'}`}>
+                      {result}
+                    </p>
+                  )}
                 </form>
               </div>
             </motion.div>
