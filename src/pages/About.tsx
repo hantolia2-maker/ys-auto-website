@@ -131,11 +131,7 @@ export const About = () => {
               '/gallery/img1.jpg',
               '/gallery/img2.jpg',
               '/gallery/img3.jpg',
-              '/gallery/img4.jpg',
-              'https://images.unsplash.com/photo-1486467562021-f6c906eba9d6?auto=format&fit=crop&q=80&w=800',
-              'https://images.unsplash.com/photo-1599256621730-535171e28e50?auto=format&fit=crop&q=80&w=800',
-              'https://images.unsplash.com/photo-1625047509168-a70dd52b6bc9?auto=format&fit=crop&q=80&w=800',
-              'https://images.unsplash.com/photo-1530046339160-ce3e5b0c7a2f?auto=format&fit=crop&q=80&w=800'
+              '/gallery/img4.jpg'
             ].map((src, idx) => (
               <motion.div 
                 key={idx}
