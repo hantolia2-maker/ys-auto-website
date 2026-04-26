@@ -133,7 +133,7 @@ export const Contact = () => {
       <section className="h-[600px] w-full relative group overflow-hidden mt-12">
         <iframe 
           title="Google Maps Location"
-          src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3358.852467140883!2d-97.3524278!3d32.6633633!2m3!1f0!2f0!3f0!3m2!1i1024!2i1024!4f13.1!3m3!1m2!1s0x864e6da246b14643%3A0xe54d6af1a5a8e0f1!2s6240%20McCart%20Ave%2C%20Fort%20Worth%2C%20TX%2076133!5e0!3m2!1sen!2sus!4v1714115000000!5m2!1sen!2sus`} 
+          src="https://www.google.com/maps?q=1900+8th+Ave+Suite+200,+Fort+Worth,+TX+76110&output=embed" 
           className="w-full h-full border-0 absolute inset-0 grayscale contrast-125 opacity-60 group-hover:grayscale-[0.2] group-hover:opacity-100 transition-all duration-1000"
           allowFullScreen
           loading="lazy"

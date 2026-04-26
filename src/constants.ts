@@ -1,9 +1,9 @@
 export const BUSINESS_INFO = {
   name: "Y & S Auto and Tires",
-  location: "6240 McCart Ave",
+  location: "1900 8th Ave Suite 200",
   city: "Fort Worth",
   state: "TX",
-  zip: "76133",
+  zip: "76110",
   phone: "+1  817-243-7056",
   phoneRaw: "18172437056",
   hours: [
