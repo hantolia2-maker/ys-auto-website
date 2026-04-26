@@ -1,29 +1,30 @@
 from PIL import Image
-import numpy as np
 
-# Load image
-img = Image.open('public/logo.png').convert('RGBA')
-arr = np.array(img)
+# Open the image
+img = Image.open('public/logo.jpg').convert("RGBA")
+datas = img.getdata()
 
-# Assuming the background is black and the logo is in the center
-# and there's a gray border. We can just find the bounding box of non-black/non-gray pixels?
-# Actually, the user says "remove the gray box border".
-# Let's crop it by 10% on all sides to see if we cut off the border.
-width, height = img.size
-left = int(width * 0.15)
-top = int(height * 0.15)
-right = int(width * 0.85)
-bottom = int(height * 0.85)
+newData = []
+# The background is dark gray/black. Let's make everything darker than (50, 50, 60) transparent.
+# To be safe, we will just make the top-left pixel color the transparent color, with a tolerance.
+bg_color = datas[0]
+tolerance = 40
 
-img_cropped = img.crop((left, top, right, bottom))
+for item in datas:
+    if abs(item[0] - bg_color[0]) < tolerance and \
+       abs(item[1] - bg_color[1]) < tolerance and \
+       abs(item[2] - bg_color[2]) < tolerance:
+        newData.append((255, 255, 255, 0))
+    else:
+        newData.append(item)
 
-# Save as transparent png? If background is black, we can convert black to transparent
-arr_cropped = np.array(img_cropped)
-r, g, b, a = np.rollaxis(arr_cropped, axis=-1)
+img.putdata(newData)
 
-# Mask black pixels (where r, g, b are all < 30)
-mask = (r < 30) & (g < 30) & (b < 30)
-arr_cropped[mask, 3] = 0
+# Now crop the image to its bounding box of non-transparent pixels
+bbox = img.getbbox()
+if bbox:
+    img = img.crop(bbox)
 
-Image.fromarray(arr_cropped).save('public/logo_fixed.png')
-print("Processed logo saved to public/logo_fixed.png")
+# Save the new image
+img.save('public/logo.png', "PNG")
+print("Successfully processed logo and saved as public/logo.png!")
