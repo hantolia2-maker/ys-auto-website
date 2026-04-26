@@ -13,7 +13,7 @@ export const Home = () => {
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://images.unsplash.com/photo-1487754180451-c856dda6ccfa?auto=format&fit=crop&q=80&w=1920" 
+            src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&q=80&w=1920" 
             alt="Premium Auto Repair" 
             className="w-full h-full object-cover opacity-30"
           />
@@ -28,9 +28,14 @@ export const Home = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
-              className="mb-8"
+              className="mb-8 overflow-hidden relative w-64 h-48 -ml-8"
             >
-              <img src="/logo.png" alt="Y&S Auto and Tires" className="h-40 md:h-56 drop-shadow-[0_0_30px_rgba(59,130,246,0.4)]" />
+              <img 
+                src="/logo.png" 
+                alt="Y&S Auto and Tires" 
+                className="w-full h-full object-cover mix-blend-lighten"
+                style={{ clipPath: 'inset(15% 10% 15% 10%)', transform: 'scale(1.4)' }}
+              />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 30 }}

@@ -29,10 +29,10 @@ export const Footer = () => {
               Fort Worth's premium choice for expert auto repair and performance tires. Certified technicians, modern diagnostics, and honest service.
             </p>
             <div className="flex gap-4 pt-2">
-              <a href="https://facebook.com/search/top?q=y%26s%20auto%20and%20tires" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-blue hover:scale-110 transition-all text-white hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]">
+              <a href="https://www.facebook.com/p/YS-Auto-and-Tires-61584466058775/" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-blue hover:scale-110 transition-all text-white hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]">
                 <Facebook size={18} />
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-blue hover:scale-110 transition-all text-white hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]">
+              <a href="https://www.instagram.com/ynsautotires/" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-blue hover:scale-110 transition-all text-white hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]">
                 <Instagram size={18} />
               </a>
             </div>
@@ -55,9 +55,6 @@ export const Footer = () => {
             <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-blue mb-8">Service Areas</h4>
             <ul className="space-y-4 text-xs font-bold uppercase tracking-widest text-brand-muted">
               <li className="hover:text-white transition-colors cursor-default">Fort Worth, TX</li>
-              <li className="hover:text-white transition-colors cursor-default">Arlington</li>
-              <li className="hover:text-white transition-colors cursor-default">Benbrook</li>
-              <li className="hover:text-white transition-colors cursor-default">Haltom City</li>
             </ul>
           </div>
 
@@ -75,8 +72,8 @@ export const Footer = () => {
             © {new Date().getFullYear()} Y&S AUTO AND TIRES. ALL RIGHTS RESERVED.
           </p>
           <div className="flex gap-8 text-[10px] font-bold uppercase tracking-widest text-brand-muted">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>

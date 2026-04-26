@@ -69,7 +69,7 @@ export const About = () => {
                   viewport={{ once: true }}
                   className="aspect-[4/5] rounded-3xl overflow-hidden glass p-2 mt-12"
                 >
-                  <img src="https://images.unsplash.com/photo-1600661653561-629240eb8bf3?auto=format&fit=crop&q=80&w=800" alt="Shop" className="object-cover w-full h-full rounded-2xl" />
+                  <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800" alt="Shop" className="object-cover w-full h-full rounded-2xl" />
                 </motion.div>
                 <motion.div 
                   initial={{ opacity: 0, y: 50 }}
@@ -78,7 +78,7 @@ export const About = () => {
                   viewport={{ once: true }}
                   className="aspect-[4/5] rounded-3xl overflow-hidden glass p-2 mb-12"
                 >
-                  <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c162?auto=format&fit=crop&q=80&w=800" alt="Professional Technician" className="object-cover w-full h-full rounded-2xl" />
+                  <img src="https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&q=80&w=800" alt="Professional Technician" className="object-cover w-full h-full rounded-2xl" />
                 </motion.div>
               </div>
             </div>

@@ -105,12 +105,12 @@ export const Services = () => {
                         <img 
                           src={`https://images.unsplash.com/photo-${
                             [
-                              '1553440569-82553b925f69', // Diagnostics
+                              '1486262715619-67b85e0b08d3', // Diagnostics
                               '1605810230434-7631ac76ec81', // Brakes
                               '1492144534655-ae79c964c9d7', // Alignment
-                              '1632733711679-52d6ce3e0b2e', // Oil
-                              '1600661653561-629240eb8bf3', // Suspension
-                              '1625047509168-a71c6ea69c5e'  // Tires
+                              '1542282088-fe8426682b8f', // Oil
+                              '1502877338535-766e1452684a', // Suspension
+                              '1494976388531-d1058494cdd8'  // Tires
                             ][index % 6]
                           }?auto=format&fit=crop&q=80&w=1200`}
                           alt={service.title}
