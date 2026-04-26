@@ -28,13 +28,13 @@ export const Home = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
-              className="mb-8 overflow-hidden relative w-64 h-48 -ml-8"
+              className="mb-8 flex justify-start"
             >
               <img 
                 src="/logo.png" 
                 alt="Y&S Auto and Tires" 
-                className="w-full h-full object-cover mix-blend-lighten"
-                style={{ clipPath: 'inset(15% 10% 15% 10%)', transform: 'scale(1.4)' }}
+                className="h-32 md:h-48 w-auto mix-blend-screen"
+                style={{ clipPath: 'inset(8%)' }}
               />
             </motion.div>
             <motion.div
