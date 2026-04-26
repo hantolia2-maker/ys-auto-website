@@ -29,6 +29,9 @@ export const Contact = () => {
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
+        headers: {
+          "Accept": "application/json"
+        },
         body: formData
       });
 
@@ -130,6 +133,9 @@ export const Contact = () => {
               <div className="glass-card p-10 lg:p-16 rounded-3xl border border-white/10">
                 <h2 className="text-3xl font-black uppercase tracking-tighter mb-10 text-white">SEND A <span className="text-brand-blue">MESSAGE</span></h2>
                 <form onSubmit={onSubmit} className="space-y-8">
+                  {/* Honeypot Spam Protection */}
+                  <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
                       <label className="block text-[10px] font-bold uppercase tracking-widest text-brand-muted mb-3 pl-4">Full Name</label>
