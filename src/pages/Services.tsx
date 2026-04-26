@@ -103,16 +103,15 @@ export const Services = () => {
                       >
                         <div className="absolute inset-0 bg-brand-blue/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 mix-blend-overlay"></div>
                         <img 
-                          src={`https://images.unsplash.com/photo-${
-                            [
-                              '1486262715619-67b85e0b08d3', // Diagnostics
-                              '1605810230434-7631ac76ec81', // Brakes
-                              '1492144534655-ae79c964c9d7', // Alignment
-                              '1542282088-fe8426682b8f', // Oil
-                              '1502877338535-766e1452684a', // Suspension
-                              '1494976388531-d1058494cdd8'  // Tires
+                          src={[
+                              'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&q=80&w=1200', // Diagnostics
+                              'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Disk_brake_dsc03682.jpg/1280px-Disk_brake_dsc03682.jpg', // Brakes
+                              'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=1200', // Alignment
+                              'https://images.unsplash.com/photo-1542282088-fe8426682b8f?auto=format&fit=crop&q=80&w=1200', // Oil
+                              'https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&q=80&w=1200', // Suspension
+                              'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&q=80&w=1200'  // Tires
                             ][index % 6]
-                          }?auto=format&fit=crop&q=80&w=1200`}
+                          }
                           alt={service.title}
                           className="w-full h-full object-cover rounded-2xl"
                         />
