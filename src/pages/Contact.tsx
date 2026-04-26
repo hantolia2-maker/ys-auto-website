@@ -133,7 +133,7 @@ export const Contact = () => {
       <section className="h-[600px] w-full relative group overflow-hidden mt-12">
         <iframe 
           title="Google Maps Location"
-          src="https://www.google.com/maps?q=1900+8th+Ave+Suite+200,+Fort+Worth,+TX+76110&output=embed" 
+          src="https://www.google.com/maps?q=Y%26S+Auto+and+Tires,+1900+8th+Ave+Suite+200,+Fort+Worth,+TX+76110&output=embed" 
           className="w-full h-full border-0 absolute inset-0 grayscale contrast-125 opacity-60 group-hover:grayscale-[0.2] group-hover:opacity-100 transition-all duration-1000"
           allowFullScreen
           loading="lazy"

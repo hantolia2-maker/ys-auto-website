@@ -227,7 +227,7 @@ export const Home = () => {
                 <div className="w-full h-full rounded-2xl overflow-hidden relative">
                   <iframe 
                     title="Homepage Google Map"
-                    src="https://www.google.com/maps?q=1900+8th+Ave+Suite+200,+Fort+Worth,+TX+76110&output=embed" 
+                    src="https://www.google.com/maps?q=Y%26S+Auto+and+Tires,+1900+8th+Ave+Suite+200,+Fort+Worth,+TX+76110&output=embed" 
                     className="w-full h-full border-0 absolute inset-0 grayscale contrast-110 opacity-70 group-hover:grayscale-[0.2] group-hover:opacity-100 transition-all duration-700"
                     allowFullScreen
                     loading="lazy"
