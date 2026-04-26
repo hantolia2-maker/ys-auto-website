@@ -27,12 +27,12 @@ export const Home = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
-            className="mb-16 w-full flex justify-center relative z-20"
+            className="mb-12 lg:mb-0 w-full flex justify-end lg:absolute lg:-top-8 lg:right-4 relative z-20"
           >
             <img 
               src="/logo.png" 
               alt="Y&S Auto and Tires" 
-              className="h-48 md:h-64 lg:h-[22rem] w-auto drop-shadow-[0_10px_30px_rgba(59,130,246,0.3)]"
+              className="h-32 md:h-48 lg:h-80 w-auto drop-shadow-[0_10px_30px_rgba(59,130,246,0.3)]"
             />
           </motion.div>
 
