@@ -126,10 +126,19 @@ export const About = () => {
             <p className="text-brand-muted mt-4 text-lg font-medium">A look at our facilities and Fort Worth location.</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[1, 2, 3, 4].map((num, idx) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              '/gallery/img1.jpg',
+              '/gallery/img2.jpg',
+              '/gallery/img3.jpg',
+              '/gallery/img4.jpg',
+              'https://images.unsplash.com/photo-1486467562021-f6c906eba9d6?auto=format&fit=crop&q=80&w=800',
+              'https://images.unsplash.com/photo-1599256621730-535171e28e50?auto=format&fit=crop&q=80&w=800',
+              'https://images.unsplash.com/photo-1625047509168-a70dd52b6bc9?auto=format&fit=crop&q=80&w=800',
+              'https://images.unsplash.com/photo-1530046339160-ce3e5b0c7a2f?auto=format&fit=crop&q=80&w=800'
+            ].map((src, idx) => (
               <motion.div 
-                key={num}
+                key={idx}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
@@ -139,8 +148,8 @@ export const About = () => {
                 <div className="w-full h-full rounded-2xl overflow-hidden relative">
                   <div className="absolute inset-0 bg-brand-blue/20 opacity-0 group-hover:opacity-100 transition-opacity z-10 mix-blend-overlay duration-500"></div>
                   <img 
-                    src={`/gallery/img${num}.jpg`} 
-                    alt={`Shop Image ${num}`} 
+                    src={src} 
+                    alt={`Shop Image ${idx + 1}`} 
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                 </div>
