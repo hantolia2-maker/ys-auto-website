@@ -12,33 +12,25 @@ export const Contact = () => {
     setIsSubmitting(true);
     setResult("Sending message...");
 
-    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
-
-    // Simulate success if testing locally without an API key
-    if (!accessKey) {
-      setTimeout(() => {
-        setIsSubmitted(true);
-        setResult("Message sent successfully! We will contact you soon.");
-        setIsSubmitting(false);
-      }, 1500);
-      return;
-    }
-
     const formData = new FormData(event.currentTarget);
-    formData.append("access_key", accessKey);
+    const dataObj: Record<string, any> = {};
+    formData.forEach((value, key) => {
+      dataObj[key] = value.toString();
+    });
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
+          "Content-Type": "application/json",
           "Accept": "application/json"
         },
-        body: formData
+        body: JSON.stringify(dataObj)
       });
 
       const data = await response.json();
 
-      if (data.success) {
+      if (response.ok && data.success) {
         setIsSubmitted(true);
         setResult("Message sent successfully! We will contact you soon.");
       } else {

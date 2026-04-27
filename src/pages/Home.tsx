@@ -171,10 +171,10 @@ export const Home = () => {
             {REVIEWS.map((review, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.15 }}
-                viewport={{ once: true }}
+                transition={{ delay: idx * 0.05, duration: 0.3, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.1 }}
                 className="glass-card p-8 rounded-3xl flex flex-col relative"
               >
                 <div className="absolute top-8 right-8 text-white/5 font-serif text-6xl leading-none">"</div>

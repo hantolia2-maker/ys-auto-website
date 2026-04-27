@@ -51,9 +51,14 @@ export const Navbar = () => {
             ? "glass rounded-full py-3 px-8 w-full max-w-5xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)]" 
             : "w-full max-w-7xl py-6 px-4 bg-transparent"
         )}>
-          <Link to="/" className="flex items-center gap-2 group">
-            <span className="text-2xl font-black italic tracking-tighter text-white group-hover:text-glow transition-all">
-              Y&S <span className="text-brand-blue">AUTO</span>
+          <Link to="/" className="flex items-center gap-3 group">
+            <img 
+              src="/logo.png" 
+              alt="Y&S Auto and Tires Logo" 
+              className="h-10 w-auto drop-shadow-[0_2px_10px_rgba(59,130,246,0.3)] group-hover:scale-105 transition-transform"
+            />
+            <span className="text-xl md:text-2xl font-black italic tracking-tighter text-white group-hover:text-glow transition-all hidden sm:block">
+              Y&S <span className="text-brand-blue">AUTO AND TIRES</span>
             </span>
           </Link>
 
