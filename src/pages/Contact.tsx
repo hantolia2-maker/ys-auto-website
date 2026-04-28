@@ -19,26 +19,38 @@ export const Contact = () => {
     });
 
     try {
-      const response = await fetch("/api/contact", {
+      const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+      
+      if (!accessKey) {
+        setResult("Error: Web3Forms Access Key is missing.");
+        setIsSubmitting(false);
+        return;
+      }
+
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json"
         },
-        body: JSON.stringify(dataObj)
+        body: JSON.stringify({
+          access_key: accessKey,
+          ...dataObj
+        })
       });
 
       const data = await response.json();
+      console.log("Web3Forms response:", data);
 
       if (response.ok && data.success) {
         setIsSubmitted(true);
         setResult("Message sent successfully! We will contact you soon.");
       } else {
-        console.log("Error", data);
+        console.error("Form error:", data);
         setResult(data.message || "Something went wrong. Please try again.");
       }
     } catch (error) {
-      console.log("Error", error);
+      console.error("Connection error:", error);
       setResult("Connection error. Please try again later.");
     } finally {
       setIsSubmitting(false);
@@ -148,8 +160,10 @@ export const Contact = () => {
                   <>
                     <h2 className="text-3xl font-black uppercase tracking-tighter mb-10 text-white">SEND A <span className="text-brand-blue">MESSAGE</span></h2>
                     <form onSubmit={onSubmit} className="space-y-8">
-                      {/* Honeypot Spam Protection */}
-                      <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
+                      {/* Honeypot Spam Protection - hidden from users, but bots will fill it */}
+                      <div className="hidden" aria-hidden="true">
+                        <input type="text" name="botcheck" tabIndex={-1} autoComplete="off" />
+                      </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
